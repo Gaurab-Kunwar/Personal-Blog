@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h1 style="margin-bottom: 8px;">{{ post.title }}</h1>
+        <p style="color: #888; margin-bottom: 24px;">
+            By {{ post.author.username }} · {{ post.created_at.strftime("%B %d, %Y") }}
+        </p>
+        <div style="line-height: 1.8; color: #ccc;">
+            {{ post.content }}
+        </div>
+    </div>
+
+    <a href="/" style="color: #888;">← Back to home</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 0 auto;">
+    <div class="card">
+        <h1 style="margin-bottom: 8px;">Create Account</h1>
+        <p style="color: #888; margin-bottom: 24px;">Join and start writing</p>
+
+        <form method="POST">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="D3rLord" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="••••••••" required>
+
+            <button type="submit" class="btn" style="width: 100%;">Create Account</button>
+        </form>
+
+        <p style="color: #888; margin-top: 16px; text-align: center;">
+            Already have an account? <a href="/login" style="color: #fff;">Login</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <div>
+            <h1 style="margin-bottom: 4px;">Welcome, {{ current_user.username }}!</h1>
+            <p style="color: #888;">Manage your posts</p>
+        </div>
+        <a href="/post/new" class="btn">+ New Post</a>
+    </div>
+
+    {% if posts %}
+        {% for post in posts %}
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: start;">
+                <div>
+                    <h2 style="margin-bottom: 6px;">
+                        <a href="/post/{{ post.id }}" style="color: #fff; text-decoration: none;">
+                            {{ post.title }}
+                        </a>
+                    </h2>
+                    <p style="color: #888; font-size: 0.85rem;">
+                        {{ post.created_at.strftime("%B %d, %Y") }}
+                    </p>
+                </div>
+                <form method="POST" action="/post/{{ post.id }}/delete">
+                    <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Delete this post?')">
+                        Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="card">
+            <p style="color: #888;">No posts yet. <a href="/post/new" style="color: #fff;">Write your first post!</a></p>
+        </div>
+    {% endif %}
+{% endblock %}

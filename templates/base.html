@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blog{% endblock %}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f0f0f;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        nav {
+            background: #1a1a1a;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.95rem;
+        }
+        nav a:hover { color: #aaa; }
+        .brand { font-size: 1.2rem; font-weight: bold; }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .btn {
+            background: #fff;
+            color: #0f0f0f;
+            padding: 10px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .btn:hover { background: #ccc; }
+        .btn-danger {
+            background: #e53e3e;
+            color: white;
+        }
+        .btn-danger:hover { background: #c53030; }
+        .flash {
+            background: #2a2a2a;
+            border-left: 4px solid #fff;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            font-family: inherit;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #555;
+        }
+        label {
+            display: block;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="brand">📝 My Blog</a>
+        <div>
+            {% if current_user.is_authenticated %}
+                <a href="/dashboard">Dashboard</a>
+                <a href="/post/new">New Post</a>
+                <a href="/logout">Logout</a>
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

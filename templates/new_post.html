@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}New Post{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <h1 style="margin-bottom: 8px;">New Post</h1>
+        <p style="color: #888; margin-bottom: 24px;">Write something interesting</p>
+
+        <form method="POST">
+            <label>Title</label>
+            <input type="text" name="title" placeholder="My awesome post" required>
+
+            <label>Content</label>
+            <textarea name="content" rows="12" placeholder="Write your post here..." required></textarea>
+
+            <div style="display: flex; gap: 12px;">
+                <button type="submit" class="btn">Publish</button>
+                <a href="/dashboard" style="color: #888; padding: 10px;">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
