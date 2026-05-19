@@ -3,27 +3,159 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <h1 style="margin-bottom: 8px;">Latest Posts</h1>
-    <p style="color: #888; margin-bottom: 30px;">Thoughts and writings</p>
+    
+    <header class="feed-header">
+        <h1>Latest Posts</h1>
+        <p>Thoughts, stories, and ideas from our writers.</p>
+    </header>
 
     {% if posts %}
-        {% for post in posts %}
-        <div class="card">
-            <h2 style="margin-bottom: 8px;">
-                <a href="/post/{{ post.id }}" style="color: #fff; text-decoration: none;">
-                    {{ post.title }}
-                </a>
-            </h2>
-            <p style="color: #888; font-size: 0.85rem; margin-bottom: 12px;">
-                By {{ post.author.username }} · {{ post.created_at.strftime("%B %d, %Y") }}
-            </p>
-            <p style="color: #ccc;">{{ post.content[:150] }}...</p>
-            <a href="/post/{{ post.id }}" style="color: #888; font-size: 0.9rem;">Read more →</a>
+        <div class="post-feed">
+            {% for post in posts %}
+            <article class="card post-card">
+                <header class="post-card-header">
+                    <h2>
+                        <a href="/post/{{ post.id }}">
+                            {{ post.title }}
+                        </a>
+                    </h2>
+                    <div class="post-meta">
+                        <span class="author">By {{ post.author.username }}</span>
+                        <span class="dot">·</span>
+                        <time>{{ post.created_at.strftime("%B %d, %Y") }}</time>
+                    </div>
+                </header>
+                
+                <div class="post-excerpt">
+                    <p>{{ post.content[:150] }}...</p>
+                </div>
+                
+                <footer class="post-card-footer">
+                    <a href="/post/{{ post.id }}" class="read-more">
+                        Read full article 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </footer>
+            </article>
+            {% endfor %}
         </div>
-        {% endfor %}
     {% else %}
-        <div class="card">
-            <p style="color: #888;">No posts yet. <a href="/register" style="color: #fff;">Create an account</a> to write the first one!</p>
+        <!-- Empty State Design -->
+        <div class="card empty-state">
+            <div class="empty-icon">✍️</div>
+            <h3>No posts yet</h3>
+            <p>Be the voice that starts the conversation. Create an account to publish your first piece!</p>
+            <a href="/register" class="btn">Get Started</a>
         </div>
     {% endif %}
+
+    
+    <style>
+        .feed-header {
+            margin-bottom: 36px;
+        }
+
+        .feed-header h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-bottom: 6px;
+        }
+
+        .feed-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        /* Post Card Styling updates */
+        .post-card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        
+        .post-card:hover h2 a {
+            color: var(--accent);
+        }
+
+        .post-card h2 a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            transition: var(--transition);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .post-meta .author {
+            color: var(--text-primary);
+            opacity: 0.85;
+        }
+
+        .post-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Animated Read More Link */
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .read-more svg {
+            transition: transform 0.2s ease;
+        }
+
+        .post-card:hover .read-more svg {
+            transform: translateX(4px);
+        }
+
+        /* Empty State Layout */
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .empty-icon {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .empty-state p {
+            color: var(--text-secondary);
+            max-width: 400px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+    </style>
 {% endblock %}

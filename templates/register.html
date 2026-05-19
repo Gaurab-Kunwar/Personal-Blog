@@ -3,24 +3,116 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div style="max-width: 400px; margin: 0 auto;">
-    <div class="card">
-        <h1 style="margin-bottom: 8px;">Create Account</h1>
-        <p style="color: #888; margin-bottom: 24px;">Join and start writing</p>
+<div class="auth-wrapper">
+    <div class="card auth-card">
+        <!-- Form Header Area -->
+        <header class="auth-header">
+            <h1>Create Account</h1>
+            <p>Join the community and start sharing your stories</p>
+        </header>
 
-        <form method="POST">
-            <label>Username</label>
-            <input type="text" name="username" placeholder="D3rLord" required>
+        <!-- Form Elements Section -->
+        <form method="POST" class="auth-form">
+            <div class="form-group">
+                <label for="username">Choose Username</label>
+                <input type="text" id="username" name="username" placeholder="e.g., yourname" required autocomplete="username">
+            </div>
 
-            <label>Password</label>
-            <input type="password" name="password" placeholder="••••••••" required>
+            <div class="form-group">
+                <label for="password">Create Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="new-password">
+            </div>
 
-            <button type="submit" class="btn" style="width: 100%;">Create Account</button>
+            <button type="submit" class="btn btn-submit">
+                Get Started
+            </button>
         </form>
 
-        <p style="color: #888; margin-top: 16px; text-align: center;">
-            Already have an account? <a href="/login" style="color: #fff;">Login</a>
-        </p>
+        <!-- Redirect Link Section -->
+        <footer class="auth-footer">
+            <p>Already have an account? <a href="/login">Sign in instead</a></p>
+        </footer>
     </div>
 </div>
+
+<!-- View-specific scoped configurations -->
+<style>
+    .auth-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 24px;
+    }
+
+    .auth-card {
+        width: 100%;
+        max-width: 420px;
+        padding: 40px !important; /* Extra breathing space inside registration container */
+    }
+
+    .auth-header {
+        text-align: center;
+        margin-bottom: 28px;
+    }
+
+    .auth-header h1 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 6px;
+    }
+
+    .auth-header p {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.95rem;
+        margin-top: 8px;
+        background: var(--text-primary);
+        color: var(--bg-main);
+    }
+
+    .auth-footer {
+        margin-top: 24px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .auth-footer p {
+        color: var(--text-secondary);
+    }
+
+    .auth-footer a {
+        color: var(--text-primary);
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+        border-bottom: 1px solid transparent;
+    }
+
+    .auth-footer a:hover {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+    }
+
+    
+    @media (max-width: 480px) {
+        .auth-card {
+            padding: 24px !important;
+            border: none;
+            background: transparent;
+            box-shadow: none;
+        }
+    }
+</style>
 {% endblock %}
