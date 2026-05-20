@@ -123,10 +123,11 @@ def view_post(id):
 @app.route("/post/<int:id>/delete", methods=["POST"])
 @login_required
 def delete_post(id):
-    if post.user_id != current_user.id:
-    flash("Unauthorized!")
-    return redirect(url_for("dashboard"))
     post = Post.query.get_or_404(id)
+
+    if post.user_id != current_user.id:
+        flash("Unauthorized")
+        return redirect(url_for("dashboard"))
     db.session.delete(post)
     db.session.commit()
     return redirect(url_for("dashboard"))
