@@ -133,6 +133,25 @@ def delete_post(id):
     return redirect(url_for("dashboard"))
 
 
+@app.route("/post/<int:id>/edit", methods=["GET", "POST"])
+@login_required
+def edit_post(id):
+    post = Post.query.get_or_404(id)
+    if post.user_id != current_user.id:
+        flash("Unauthorized!")
+        return redirect(url_for("dashboard"))
+    if request.method == "POST":
+        post.title = request.form["title"]
+        post.content = request.form["content"]
+
+        db.session.commit()
+
+        flash("Blog updated successfully")
+        return redirect(url_for("dashboard"))
+
+    return render_template("edit_post.html", post=post)
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
