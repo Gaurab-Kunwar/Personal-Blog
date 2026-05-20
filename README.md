@@ -57,7 +57,6 @@ Visit `http://127.0.0.1:5000` in your browser.
 ## 🔮 Planned Features
 
 - AI writing assistant (Claude API integration)
-- Edit post functionality
 - Post categories and tags
 
 ---
