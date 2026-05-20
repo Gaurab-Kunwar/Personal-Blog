@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}500 - Server Error{% endblock %}
+
+{% block content %}
+    <div class="error-container" style="text-align: center; padding: 60px 20px;">
+        <h1 style="font-size: 4rem; margin-bottom: 12px;">500</h1>
+        <h2 style="font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 24px;">Internal Server Error</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 32px;">Something went wrong on our end. Please try again later.</p>
+        <a href="/" class="btn">Go Back Home</a>
+    </div>
+{% endblock %}
