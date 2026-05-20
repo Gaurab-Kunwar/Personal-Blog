@@ -10,7 +10,9 @@
             <p>Manage, track, and publish your content.</p>
         </div>
         <a href="/post/new" class="btn btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14"/>
+            </svg>
             New Post
         </a>
     </header>
@@ -26,16 +28,23 @@
                         </a>
                     </h2>
                     <div class="item-date">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="18" y2="10"></line></svg>
-                        <time>{{ post.created_at.strftime("%B %d, %Y") }}</time>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <path d="M16 2v4M8 2v4M3 10h18"/>
+                        </svg>
+                        <time datetime="{{ post.created_at.isoformat() }}">{{ post.created_at.strftime("%B %d, %Y") }}</time>
                     </div>
                 </div>
                 
                 <div class="item-actions">
+                    <a href="/post/{{ post.id }}/edit" class="btn btn-secondary btn-sm">✏️ Edit</a>
                     <form method="POST" action="/post/{{ post.id }}/delete" class="delete-form">
                         <button type="submit" class="btn btn-danger btn-sm"
                             onclick="return confirm('Are you sure you want to permanently delete this post?')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"/>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            </svg>
                             Delete
                         </button>
                     </form>
@@ -93,7 +102,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 24px;
-            margin-bottom: 0; /* Override the default card margin gap */
+            margin-bottom: 0;
         }
 
         .dashboard-item:hover h2 a {
@@ -117,6 +126,10 @@
             margin-top: 6px;
         }
 
+        .item-actions {
+            display: flex;
+            gap: 8px;
+        }
         
         .btn-sm {
             padding: 8px 14px;
@@ -168,6 +181,7 @@
             }
             .item-actions {
                 width: 100%;
+                flex-direction: column;
             }
             .item-actions .btn {
                 width: 100%;
