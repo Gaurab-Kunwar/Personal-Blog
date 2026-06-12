@@ -6,3 +6,4 @@ static
 *.db
 *.pyc
 __pycache__/
+.Dockerfile
