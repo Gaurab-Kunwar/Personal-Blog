@@ -53,6 +53,12 @@ python app.py
 Visit `http://127.0.0.1:5000` in your browser.
 
 ---
+## Running with Docker
+
+```bash
+docker build -t personal-blog .
+docker run -p 5000:5000 --env-file .env -v $(pwd)/instance:/app/instance personal-blog
+```
 
 ## 🔮 Planned Features
 
