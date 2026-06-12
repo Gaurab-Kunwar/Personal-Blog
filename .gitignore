@@ -7,3 +7,4 @@ static
 *.pyc
 __pycache__/
 .Dockerfile
+Dockerfile
