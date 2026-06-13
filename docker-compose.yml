@@ -5,5 +5,17 @@ services:
       - "5000:5000"
     env_file:
       - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: blog_db
+      POSTGRES_USER: blog_user
+      POSTGRES_PASSWORD: prototype1724
     volumes:
-      - ./instance:/app/instance
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
