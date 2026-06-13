@@ -1,122 +1,35 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}{{ post.title }}{% endblock %} {%
+block content %}
+<div class="article-navigation">
+  <a href="/" class="back-link">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    Back to home
+  </a>
+</div>
 
-{% block title %}{{ post.title }}{% endblock %}
+<article class="card article-card">
+  <header class="article-header">
+    <h1>{{ post.title }}</h1>
+    <div class="article-meta">
+      <span class="author">By {{ post.author.username }}</span>
+      <span class="dot">·</span>
+      <time>{{ post.created_at.strftime("%B %d, %Y") }}</time>
+    </div>
+  </header>
 
-{% block content %}
-    <!-- Back to home navigation above the article -->
-    <nav class="article-navigation">
-        <a href="/" class="back-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Back to home
-        </a>
-    </nav>
-
-    <!-- Full Article Container -->
-    <article class="card article-card">
-        <header class="article-header">
-            <h1>{{ post.title }}</h1>
-            <div class="article-meta">
-                <span class="author">By {{ post.author.username }}</span>
-                <span class="dot">·</span>
-                <time>{{ post.created_at.strftime("%B %d, %Y") }}</time>
-            </div>
-        </header>
-
-        
-        <div class="article-body">
-            {{ post.content }}
-        </div>
-    </article>
+  <div class="article-body">{{ post.content }}</div>
+</article>
 {% endblock %}
-
-<!-- View-specific article presentation styling -->
-<style>
-    .article-navigation {
-        background: transparent;
-        padding: 0;
-        border: none;
-        margin-bottom: 20px;
-        display: block;
-    }
-
-    .back-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        color: var(--text-secondary);
-        text-decoration: none;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: var(--transition);
-    }
-
-    .back-link svg {
-        transition: transform 0.2s ease;
-    }
-
-    .back-link:hover {
-        color: var(--text-primary);
-    }
-
-    .back-link:hover svg {
-        transform: translateX(-4px);
-    }
-
-    /* Spacious card layout for long-form articles */
-    .article-card {
-        padding: 48px 40px !important;
-    }
-
-    .article-header {
-        margin-bottom: 32px;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 24px;
-    }
-
-    .article-header h1 {
-        font-size: 2.5rem;
-        font-weight: 800;
-        letter-spacing: -0.03em;
-        line-height: 1.25;
-        margin-bottom: 12px;
-        color: var(--text-primary);
-    }
-
-    .article-meta {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-    }
-
-    .article-meta .author {
-        color: var(--text-primary);
-        opacity: 0.9;
-        font-weight: 500;
-    }
-
-    /* Optimized typography layout for content reading */
-    .article-body {
-        font-size: 1.05rem;
-        line-height: 1.75;
-        color: #e5e7eb; 
-        letter-spacing: -0.003em;
-        white-space: pre-line; 
-    }
-
-   
-    @media (max-width: 640px) {
-        .article-card {
-            padding: 28px 20px !important;
-        }
-
-        .article-header h1 {
-            font-size: 1.85rem;
-        }
-        
-        .article-body {
-            font-size: 1rem;
-        }
-    }
-</style>

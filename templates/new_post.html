@@ -1,106 +1,62 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}New Post{% endblock %} {% block
+content %}
+<div class="card editor-card">
+  <!-- Form Header Area -->
+  <header class="editor-header">
+    <h1>Create New Post</h1>
+    <p>
+      Draft your thoughts, format your content, and share it with the world.
+    </p>
+  </header>
 
-{% block title %}New Post{% endblock %}
-
-{% block content %}
-    <div class="card editor-card">
-        <!-- Form Header Area -->
-        <header class="editor-header">
-            <h1>Create New Post</h1>
-            <p>Draft your thoughts, format your content, and share it with the world.</p>
-        </header>
-
-        <!-- Post Creation Form -->
-        <form method="POST" class="editor-form">
-            <div class="form-group">
-                <label for="title">Post Title</label>
-                <input type="text" id="title" name="title" placeholder="Give your masterpiece a title..." required autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label for="content">Article Body</label>
-                <textarea id="content" name="content" rows="14" placeholder="Start writing something interesting..." required></textarea>
-            </div>
-
-            <!-- Form Actions Control Row -->
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                    Publish Post
-                </button>
-                <a href="/dashboard" class="btn btn-secondary">
-                    Cancel
-                </a>
-            </div>
-        </form>
+  <!-- Post Creation Form -->
+  <form method="POST" class="editor-form">
+    <div class="form-group">
+      <label for="title">Post Title</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        placeholder="Give your masterpiece a title..."
+        required
+        autocomplete="off"
+      />
     </div>
 
-<!-- View-specific editor style overrides -->
-<style>
-    .editor-card {
-        padding: 40px !important; /* Spacious text composition layout padding */
-    }
+    <div class="form-group">
+      <label for="content">Article Body</label>
+      <textarea
+        id="content"
+        name="content"
+        rows="14"
+        placeholder="Start writing something interesting..."
+        required
+      ></textarea>
+    </div>
 
-    .editor-header {
-        margin-bottom: 32px;
-        border-bottom: 1px solid var(--border-color);
-        padding-bottom: 20px;
-    }
+    <!-- Form Actions Control Row -->
+    <div class="form-actions">
+      <!-- Cancel button placed first for consistent mobile column-reverse stack ordering -->
+      <a href="/dashboard" class="btn btn-secondary"> Cancel </a>
 
-    .editor-header h1 {
-        font-size: 1.85rem;
-        font-weight: 800;
-        letter-spacing: -0.025em;
-        margin-bottom: 6px;
-    }
-
-    .editor-header p {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-    }
-
-    .editor-form {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    
-    textarea {
-        line-height: 1.6;
-        font-family: inherit;
-    }
-
-    
-    .form-actions {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-top: 12px;
-        border-top: 1px solid var(--border-color);
-        padding-top: 24px;
-    }
-
-    .form-actions .btn svg {
-        margin-right: 6px;
-        flex-shrink: 0;
-    }
-
-    
-    @media (max-width: 640px) {
-        .editor-card {
-            padding: 24px 16px !important;
-        }
-        
-        .form-actions {
-            flex-direction: column-reverse; 
-            align-items: stretch;
-            gap: 8px;
-        }
-
-        .form-actions .btn {
-            width: 100%;
-        }
-    }
-</style>
+      <button type="submit" class="btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+        Publish Post
+      </button>
+    </div>
+  </form>
+</div>
 {% endblock %}
